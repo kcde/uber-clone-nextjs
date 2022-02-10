@@ -6,26 +6,36 @@ mapboxgl.accessToken =
   'pk.eyJ1IjoibGFtYmEtanV3b24iLCJhIjoiY2t6YnhmYm9zMXRlNDJwczh6eXVqcWd1YyJ9.ovakTKfnCbRdvNmkRIu-8w';
 
 const Wrapper = tw.div`
-  flex-1 bg-red-100
+  flex-1  h-1/2
   `;
 
-const Map = () => {
+const Map = ({ pickup, dropof }) => {
   const mapContainer = useRef(null);
-  const map = useRef(null);
-  const [lng, setLng] = useState(-70.9);
-  const [lat, setLat] = useState(42.35);
-  const [zoom, setZoom] = useState(1);
+
+  console.log(pickup);
+  const addToMap = (map, pickupCoords, dropofCoords) => {
+    const fromMarker = new mapboxgl.Marker().setLngLat(pickupCoords).addTo(map);
+    const toMarker = new mapboxgl.Marker().setLngLat(dropofCoords).addTo(map);
+  };
 
   useEffect(() => {
-    if (map.current) return; // initialize map only once
-    map.current = new mapboxgl.Map({
+    const map = new mapboxgl.Map({
       container: mapContainer.current,
       style: 'mapbox://styles/drakosi/ckvcwq3rwdw4314o3i2ho8tph',
-      center: [lng, lat],
-      zoom: zoom,
+      center: [-70.9, 42.35],
+      zoom: 1,
     });
-  });
-  return <Wrapper ref={mapContainer}>Map section</Wrapper>;
+
+    if (pickup && dropof) {
+      console.log(pickup);
+      addToMap(map, pickup, dropof);
+      map.fitBounds([pickup, dropof], {
+        padding: 80,
+      });
+    }
+  }, [pickup, dropof]);
+
+  return <Wrapper ref={mapContainer}></Wrapper>;
 };
 
 export default Map;

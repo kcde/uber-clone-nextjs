@@ -1,0 +1,34 @@
+{
+  "cars": [
+    {
+      "id": "0",
+      "name": "Uber X",
+      "imgUrl": "https://i.ibb.co/cyvcpfF/uberx.png",
+      "multiplier": "1"
+    },
+    {
+      "id": "1",
+      "name": "Uber XL",
+      "imgUrl": "https://i.ibb.co/YDYMKny/uberxl.png",
+      "multiplier": "1.5"
+    },
+    {
+      "id": "2",
+      "name": "Uber Black",
+      "imgUrl": "https://i.ibb.co/Xx4G91m/uberblack.png",
+      "multiplier": "2"
+    },
+    {
+      "id": "3",
+      "name": "Comfort",
+      "imgUrl": "https://i.ibb.co/cyvcpfF/uberx.png",
+      "multiplier": "1.2"
+    },
+    {
+      "id": "4",
+      "name": "Uber Black SUV",
+      "imgUrl": "https://i.ibb.co/1nStPWT/uberblacksuv.png",
+      "multiplier": "2.8"
+    }
+  ]
+}

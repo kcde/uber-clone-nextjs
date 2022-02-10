@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Link from 'next/link';
 import tw from 'tailwind-styled-components';
 
@@ -22,17 +22,19 @@ w-10 h-10 rounded-full bg-gray-200 ml-3
 `;
 const AddIcon = tw.img``;
 
-const SavedPlaces = tw.div`flex items-center bg-white px-4 py-2 mb-3 `;
+const SavedPlaces = tw.div`flex items-center bg-white px-4 py-2`;
 const StarIcon = tw.img` bg-gray-400 w-10  h-10 p-2 rounded-full mr-2`;
 const ConfirmButtonContainer = tw.div`
-px-3
+p-4 bg-white
 `;
 const ConfirmButton = tw.button`
-bg-black text-white w-full text-center py-2 mr-2
+bg-black text-white w-full text-center py-2 mr-2 rounded-md
 
 `;
 
 const Search = () => {
+  const [dropofAddress, setDropofAddress] = useState('');
+  const [pickupAddress, setPickupAddress] = useState('');
   return (
     <Wrapper>
       <ButtonContainer>
@@ -49,8 +51,16 @@ const Search = () => {
         </FromToIcons>
 
         <Destination>
-          <PickupInput placeholder="Enter pickup location" />
-          <DropoffInput placeholder="Where to?" />
+          <PickupInput
+            placeholder="Enter pickup location"
+            value={pickupAddress}
+            onChange={(e) => setPickupAddress(e.target.value)}
+          />
+          <DropoffInput
+            placeholder="Where to?"
+            value={dropofAddress}
+            onChange={(e) => setDropofAddress(e.target.value)}
+          />
         </Destination>
 
         <AddRide>
@@ -64,7 +74,12 @@ const Search = () => {
       </SavedPlaces>
 
       <ConfirmButtonContainer>
-        <ConfirmButton>Confirm Locations</ConfirmButton>
+        <Link
+          href={{ pathname: '/confirm', query: { pickup: pickupAddress, dropof: dropofAddress } }}
+          passHref
+        >
+          <ConfirmButton>Confirm Locations</ConfirmButton>
+        </Link>
       </ConfirmButtonContainer>
     </Wrapper>
   );

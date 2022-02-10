@@ -31,7 +31,7 @@ const Name = tw.div`
 mr-4 w-10 text-sm
 `;
 const UserImage = tw.img`
-w-12 h-12 rounded-full border border-gray-200 p-px
+w-12 h-12 rounded-full border bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 p-0.5
 `;
 
 const ActionButtons = tw.div`
