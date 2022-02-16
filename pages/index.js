@@ -1,10 +1,10 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useState } from 'react';
 import Link from 'next/link';
-import Head from 'next/head';
-import Image from 'next/image';
 import tw from 'tailwind-styled-components';
 import Map from '../components/map';
-
+import { signInWithPopup, onAuthStateChanged, signOut } from 'firebase/auth';
+import { auth } from '../firebase';
+import { useRouter } from 'next/router';
 const Wrapper = tw.div`
 flex flex-col  h-screen
 
@@ -51,6 +51,19 @@ bg-gray-200 h-20 text-2xl p-4 flex items-center mt-8 rounded-lg
 `;
 
 export default function Home() {
+  const router = useRouter();
+  const [userData, setUserData] = useState();
+
+  useEffect(() => {
+    return onAuthStateChanged(auth, (user) => {
+      if (user) {
+        setUserData({
+          imgUrl: user.photoURL,
+          name: user.displayName.split(' ')[0],
+        });
+      }
+    });
+  }, []);
   return (
     <Wrapper>
       <Map />
@@ -58,8 +71,8 @@ export default function Home() {
         <Header>
           <UberLogo src="https://i.ibb.co/84stgjq/uber-technologies-new-20218114.jpg" />
           <Profile>
-            <Name>keside</Name>
-            <UserImage src="https://picsum.photos/id/1074/200" />
+            <Name>{userData && userData.name}</Name>
+            <UserImage onClick={() => signOut(auth)} src={userData && userData.imgUrl} />
           </Profile>
         </Header>
         <ActionButtons>

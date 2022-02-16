@@ -17,7 +17,9 @@ const CarImage = tw.img`
 h-1/5 w-1/5
 `;
 
-const Ride = ({ name, img }) => {
+const Ride = ({ name, img, multiplier, rideDuration }) => {
+  const price = +rideDuration * +multiplier;
+
   return (
     <Wrapper>
       <CarInfo>
@@ -34,7 +36,7 @@ const Ride = ({ name, img }) => {
       </CarInfo>
 
       <Price>
-        <p>$5.00</p>
+        <p>${price.toFixed(2)}</p>
       </Price>
     </Wrapper>
   );

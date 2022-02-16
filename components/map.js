@@ -12,7 +12,6 @@ const Wrapper = tw.div`
 const Map = ({ pickup, dropof }) => {
   const mapContainer = useRef(null);
 
-  console.log(pickup);
   const addToMap = (map, pickupCoords, dropofCoords) => {
     const fromMarker = new mapboxgl.Marker().setLngLat(pickupCoords).addTo(map);
     const toMarker = new mapboxgl.Marker().setLngLat(dropofCoords).addTo(map);
@@ -27,7 +26,6 @@ const Map = ({ pickup, dropof }) => {
     });
 
     if (pickup && dropof) {
-      console.log(pickup);
       addToMap(map, pickup, dropof);
       map.fitBounds([pickup, dropof], {
         padding: 80,
